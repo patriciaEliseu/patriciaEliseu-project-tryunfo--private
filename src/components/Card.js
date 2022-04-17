@@ -7,7 +7,7 @@ class Card extends Component {
       cardAttr3, cardImage, cardRare, cardTrunfo } = this.props;
     return (
       <div>
-        <h1 data-testid="name-card" value={ cardName }>Nome da carta</h1>
+        <h1 data-testid="name-card">{ cardName }</h1>
         <img
           data-testid="image-card"
           src={ cardImage }
@@ -16,14 +16,13 @@ class Card extends Component {
         />
         <h2
           data-testid="description-card"
-          value={ cardDescription }
         >
-          Descrição da carta
+          { cardDescription }
         </h2>
-        <p data-testid="attr1-card" value={ cardAttr1 }>12</p>
-        <p data-testid="attr2-card" value={ cardAttr2 }>34</p>
-        <p data-testid="attr3-card" value={ cardAttr3 }>56</p>
-        <p data-testid="rare-card" value={ cardRare }>raro</p>
+        <p data-testid="attr1-card">{ cardAttr1 }</p>
+        <p data-testid="attr2-card">{ cardAttr2 }</p>
+        <p data-testid="attr3-card">{ cardAttr3 }</p>
+        <p data-testid="rare-card">{ cardRare }</p>
         {/* <h2 data-testid="trunfo-card" value={ cardTrunfo }>Super Trunfo</h2> */}
         {/* exemplo de renderização condicional */}
         {/* { array.length > 0 && <p>Array não vazio!</p> } */}
