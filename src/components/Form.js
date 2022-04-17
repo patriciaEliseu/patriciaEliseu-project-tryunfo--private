@@ -95,6 +95,7 @@ class Form extends Component {
           />
         </label>
         <button
+          name="salvar"
           onClick={ onSaveButtonClick }
           type="button"
           data-testid="save-button"
