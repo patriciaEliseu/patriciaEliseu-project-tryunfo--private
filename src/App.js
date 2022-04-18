@@ -36,7 +36,15 @@ class App extends Component {
   }
 
   onSaveButtonClick() {
-    // console.log(this);
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: '',
+    });
   }
 
   verificarInputPreenche() {
@@ -61,6 +69,7 @@ class App extends Component {
     return (
       <form>
         <Form
+          // onSubmit={this.}
           cardName={ cardName }
           cardDescription={ cardDescription }
           cardAttr1={ cardAttr1 }
