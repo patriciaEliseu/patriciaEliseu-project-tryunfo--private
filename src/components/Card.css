@@ -1,0 +1,12 @@
+.cartas {
+  background-color: white;
+  border-radius: 2rem;
+  box-shadow: 0 0 5px 3px;
+  color: black;
+  display: inline-block;
+  font-size: 1.1rem;
+  margin-right: 10rem;
+  padding: 0.5rem;
+  text-align: 1.1rem;
+  width: 20rem;
+}

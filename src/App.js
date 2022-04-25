@@ -19,14 +19,16 @@ class App extends Component {
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
-      /* hasTrunfo: false, */
       isSaveButtonDisabled: true,
+      baralho: [],
     };
   }
 
   onInputChange({ target }) {
     const { name } = target;
+    // console.log('nome', name);
     const value = target.type === 'checkbox' ? target.checked : target.value;
+    // console.log('valor', target.value);
     this.setState({ [name]: value }, () => {
       const validar = !this.verificarInputPreenche();
       // console.log('sou eu', validar);
@@ -34,16 +36,38 @@ class App extends Component {
     });
     // console.log(this.state);
   }
+  /* criar carta e salvar ao baralho
+   adicionar a carta ao baralho */
 
   onSaveButtonClick() {
+    const { cardName, cardDescription,
+      cardAttr1, cardAttr2, cardAttr3,
+      cardImage, cardRare, cardTrunfo } = this.state;
+    const novaCarta = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    };
+    // console.log(baralho);
+    this.setState((prevState) => ({
+      baralho: [...prevState.baralho, novaCarta],
+    }));
+    // console.log(baralho);
+    /*  este param prevState está buscando o estado antes de ser alterado pela setState. */
     this.setState({
       cardName: '',
       cardDescription: '',
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
-      cardRare: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
     });
   }
 
@@ -64,12 +88,11 @@ class App extends Component {
   render() {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage,
-      cardRare, cardTrunfo,
+      cardRare, cardTrunfo, baralho,
       isSaveButtonDisabled } = this.state;
     return (
       <form>
         <Form
-          // onSubmit={this.}
           cardName={ cardName }
           cardDescription={ cardDescription }
           cardAttr1={ cardAttr1 }
@@ -78,7 +101,7 @@ class App extends Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
-          // hasTrunfo={ hasTrunfo }
+          hasTrunfo={ baralho.some((carta) => carta.cardTrunfo === true) }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
           isSaveButtonDisabled={ isSaveButtonDisabled }
