@@ -91,32 +91,49 @@ class App extends Component {
       cardRare, cardTrunfo, baralho,
       isSaveButtonDisabled } = this.state;
     return (
-      <form>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ baralho.some((carta) => carta.cardTrunfo === true) }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-      </form>
+      <>
+        <div>
+          <Form
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            hasTrunfo={ baralho.some((carta) => carta.cardTrunfo === true) }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+          />
+          <Card
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+          />
+        </div>
+        <div>
+          {baralho.map((carta) => (<Card
+            cardName={ carta.cardName }
+            cardDescription={ carta.cardDescription }
+            cardAttr1={ carta.cardAttr1 }
+            cardAttr2={ carta.cardAttr2 }
+            cardAttr3={ carta.cardAttr3 }
+            cardImage={ carta.cardImage }
+            cardRare={ carta.cardRare }
+            cardTrunfo={ carta.cardTrunfo }
+            Key={ carta.name }
+          />))}
+          ;
+        </div>
+
+      </>
     );
   }
 }
