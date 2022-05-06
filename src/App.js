@@ -69,6 +69,7 @@ class App extends Component {
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
+      isSaveButtonDisabled: true,
     });
   }
 
