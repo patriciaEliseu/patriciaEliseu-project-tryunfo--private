@@ -5,7 +5,8 @@ import './Card.css';
 class Card extends Component {
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
-      cardAttr3, cardImage, cardRare, cardTrunfo } = this.props;
+      cardAttr3, cardImage, cardRare, cardTrunfo,
+    } = this.props;
     return (
       <div className="cartas">
         <h1 data-testid="name-card">{ cardName }</h1>

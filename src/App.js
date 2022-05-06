@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import Deck from './components/Deck';
 
 class App extends Component {
   constructor() {
@@ -71,6 +72,12 @@ class App extends Component {
     });
   }
 
+  deletedButton = (e) => {
+    const { baralho } = this.state;
+    const newDeck = baralho.filter((carta) => carta.cardName !== e);
+    this.setState({ baralho: newDeck });
+  }
+
   verificarInputPreenche() {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3,
@@ -118,19 +125,22 @@ class App extends Component {
             cardTrunfo={ cardTrunfo }
           />
         </div>
-        <div>
-          {baralho.map((carta) => (<Card
-            cardName={ carta.cardName }
-            cardDescription={ carta.cardDescription }
-            cardAttr1={ carta.cardAttr1 }
-            cardAttr2={ carta.cardAttr2 }
-            cardAttr3={ carta.cardAttr3 }
-            cardImage={ carta.cardImage }
-            cardRare={ carta.cardRare }
-            cardTrunfo={ carta.cardTrunfo }
-            Key={ carta.name }
-          />))}
-          ;
+        <div className="Deck">
+          {baralho.map((carta) => (
+            <Deck
+              cardName={ carta.cardName }
+              cardDescription={ carta.cardDescription }
+              cardAttr1={ carta.cardAttr1 }
+              cardAttr2={ carta.cardAttr2 }
+              cardAttr3={ carta.cardAttr3 }
+              cardImage={ carta.cardImage }
+              cardRare={ carta.cardRare }
+              cardTrunfo={ carta.cardTrunfo }
+              deletedButton={ this.deletedButton }
+              Key={ carta.name }
+            />
+
+          ))}
         </div>
 
       </>

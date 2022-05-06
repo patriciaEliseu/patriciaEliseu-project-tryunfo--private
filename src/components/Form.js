@@ -107,7 +107,7 @@ class Form extends Component {
           data-testid="save-button"
           disabled={ isSaveButtonDisabled }
         >
-          `Salvar`
+          Salvar
         </button>
       </form>
     );
