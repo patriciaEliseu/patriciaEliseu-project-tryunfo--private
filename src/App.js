@@ -23,6 +23,7 @@ class App extends Component {
       isSaveButtonDisabled: true,
       baralho: [],
       baralhoFiltrado: [],
+      pesquisa: '',
     };
   }
 
@@ -84,10 +85,12 @@ class App extends Component {
   }
 
   changePesquisa = (e) => {
-    const { baralho } = this.state;
-    const pesquisa = e.target.value;
-    const baralhoFiltrado = baralho.filter((carta) => carta.cardName.includes(pesquisa));
-    this.setState({ baralhoFiltrado });
+    this.setState({ pesquisa: e.target.value }, () => {
+      const { baralho, pesquisa } = this.state;
+      const baralhoFiltrado = baralho.filter((carta) => (
+        carta.cardName.includes(pesquisa)));
+      this.setState({ baralhoFiltrado });
+    });
   }
 
   verificarInputPreenche() {
@@ -108,7 +111,14 @@ class App extends Component {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage,
       cardRare, cardTrunfo, baralho,
-      isSaveButtonDisabled, baralhoFiltrado } = this.state;
+      isSaveButtonDisabled, baralhoFiltrado, pesquisaSuperTrunfo, pesquisa } = this.state;
+
+    let baralhoRenderizado = [];
+    if (pesquisa.length === 0) {
+      baralhoRenderizado = baralho;
+    } else {
+      baralhoRenderizado = baralhoFiltrado;
+    }
     return (
       <>
         <div>
@@ -144,9 +154,19 @@ class App extends Component {
               onChange={ this.changePesquisa }
             />
           </label>
+          <label htmlFor="checkbox">
+            Super Trunfo
+            <input
+              type="checkbox"
+              data-testid="trunfo-filter"
+              checked={ pesquisaSuperTrunfo }
+              // onChange={ pesqSuperTrunfo }
+            />
+          </label>
+
         </div>
         <div className="Deck">
-          {baralhoFiltrado.map((carta, index) => (
+          {baralhoRenderizado.map((carta, index) => (
             <Deck
               cardName={ carta.cardName }
               cardDescription={ carta.cardDescription }
