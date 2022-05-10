@@ -24,6 +24,7 @@ class App extends Component {
       baralho: [],
       baralhoFiltrado: [],
       pesquisa: '',
+      trunfo: false,
     };
   }
 
@@ -111,10 +112,13 @@ class App extends Component {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage,
       cardRare, cardTrunfo, baralho,
-      isSaveButtonDisabled, baralhoFiltrado, pesquisaSuperTrunfo, pesquisa } = this.state;
+      isSaveButtonDisabled, baralhoFiltrado, pesquisaSuperTrunfo, pesquisa,
+      trunfo } = this.state;
 
     let baralhoRenderizado = [];
-    if (pesquisa.length === 0) {
+    if (trunfo === true) {
+      baralhoRenderizado = baralho.filter((carta) => carta.cardTrunfo === true);
+    } else if (pesquisa.length === 0) {
       baralhoRenderizado = baralho;
     } else {
       baralhoRenderizado = baralhoFiltrado;
@@ -157,10 +161,11 @@ class App extends Component {
           <label htmlFor="checkbox">
             Super Trunfo
             <input
+              name="trunfo"
               type="checkbox"
               data-testid="trunfo-filter"
               checked={ pesquisaSuperTrunfo }
-              // onChange={ pesqSuperTrunfo }
+              onChange={ this.onInputChange }
             />
           </label>
 
