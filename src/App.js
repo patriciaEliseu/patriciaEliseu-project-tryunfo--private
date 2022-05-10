@@ -22,6 +22,7 @@ class App extends Component {
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       baralho: [],
+      baralhoFiltrado: [],
     };
   }
 
@@ -57,7 +58,10 @@ class App extends Component {
     // console.log(baralho);
     this.setState((prevState) => ({
       baralho: [...prevState.baralho, novaCarta],
-    }));
+    }), () => {
+      const { baralho } = this.state;
+      this.setState({ baralhoFiltrado: baralho });
+    });
     // console.log(baralho);
     /*  este param prevState está buscando o estado antes de ser alterado pela setState. */
     this.setState({
@@ -79,6 +83,13 @@ class App extends Component {
     this.setState({ baralho: newDeck });
   }
 
+  changePesquisa = (e) => {
+    const { baralho } = this.state;
+    const pesquisa = e.target.value;
+    const baralhoFiltrado = baralho.filter((carta) => carta.cardName.includes(pesquisa));
+    this.setState({ baralhoFiltrado });
+  }
+
   verificarInputPreenche() {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3,
@@ -97,7 +108,7 @@ class App extends Component {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage,
       cardRare, cardTrunfo, baralho,
-      isSaveButtonDisabled } = this.state;
+      isSaveButtonDisabled, baralhoFiltrado } = this.state;
     return (
       <>
         <div>
@@ -125,9 +136,17 @@ class App extends Component {
             cardRare={ cardRare }
             cardTrunfo={ cardTrunfo }
           />
+          <label htmlFor="text">
+            Filtro de buscando
+            <input
+              type="text"
+              data-testid="name-filter"
+              onChange={ this.changePesquisa }
+            />
+          </label>
         </div>
         <div className="Deck">
-          {baralho.map((carta) => (
+          {baralhoFiltrado.map((carta, index) => (
             <Deck
               cardName={ carta.cardName }
               cardDescription={ carta.cardDescription }
@@ -138,10 +157,10 @@ class App extends Component {
               cardRare={ carta.cardRare }
               cardTrunfo={ carta.cardTrunfo }
               deletedButton={ this.deletedButton }
-              Key={ carta.name }
+              key={ index }
             />
-
           ))}
+
         </div>
 
       </>
